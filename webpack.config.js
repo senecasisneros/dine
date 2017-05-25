@@ -13,6 +13,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress:{
         warnings: false
@@ -23,6 +24,11 @@ module.exports = {
         NODE_ENV: JSON.stringify('production')
       }
     }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+    }),
+    new webpack.optimize.DedupePlugin(),
   ],
   module: {
     loaders: [
@@ -77,9 +83,28 @@ module.exports = {
         loader: 'json-loader',
       },
       {
-        test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
-        loader: 'imports?jQuery=jquery',
+        test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url'
       },
+      {
+        loader: 'image-webpack-loader',
+        options: {
+          progressive: true,
+          optipng: {
+            optimizationLevel: 7,
+          },
+          mozjpeg: {
+            quality: 65
+          },
+          gifsicle: {
+            interlaced: true,
+          },
+          pngquant: {
+            quality: '65-90',
+            speed: 4
+          }
+        }
+      }
     ],
   },
 };

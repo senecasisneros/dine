@@ -21,7 +21,12 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+    }),
   ],
   module: {
     loaders: [
@@ -79,6 +84,25 @@ module.exports = {
         test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
         loader: 'imports?jQuery=jquery',
       },
+      {
+        loader: 'image-webpack-loader',
+        options: {
+          progressive: true,
+          optipng: {
+            optimizationLevel: 7,
+          },
+          mozjpeg: {
+            quality: 65
+          },
+          gifsicle: {
+            interlaced: true,
+          },
+          pngquant: {
+            quality: '65-90',
+            speed: 4
+          }
+        }
+      }
     ],
   },
 };

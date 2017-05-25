@@ -10,9 +10,9 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-// const dotenv = require('dotenv');
-//
-// dotenv.config({ silent: true });
+
+
+require('dotenv').load({ silent: true });
 
 // DB CONNECT
 require('mongoose').connect(MONGO_URI, err => {
@@ -45,6 +45,8 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+
 
 // ROUTES
 app.use('/api', require('./routes/api'));

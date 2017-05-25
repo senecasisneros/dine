@@ -4,7 +4,7 @@
 const PORT = process.env.PORT || 8000;
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/dine1';
 
-require('dotenv').config();
+
 
 // PACKAGE REQUIRES
 const bodyParser = require('body-parser');
@@ -12,6 +12,9 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const dotenv = require('dotenv');
+
+dotenv.config({ silent: true });
 
 // DB CONNECT
 require('mongoose').connect(MONGO_URI, err => {

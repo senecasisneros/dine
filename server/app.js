@@ -1,10 +1,7 @@
 "use strict";
-import dotenv from 'dotenv';
-
-
 // CONSTANTS
 const PORT = process.env.PORT || 8000;
-const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/dine1';
+const MONGO_URI = process.env.MONGOLAB_URL || 'mongodb://localhost/dine1';
 
 // require('dotenv').config();
 dotenv.config({ silent: true });

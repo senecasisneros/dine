@@ -1,11 +1,10 @@
 "use strict";
+
 // CONSTANTS
 const PORT = process.env.PORT || 8000;
 const MONGO_URI = process.env.MONGOLAB_URL || 'mongodb://localhost/dine1';
 
 require('dotenv').config();
-// dotenv.config({ silent: true });
-
 
 // PACKAGE REQUIRES
 const bodyParser = require('body-parser');

@@ -1,14 +1,22 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { Button, Jumbotron } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Jumbotron } from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
+import { FlatButton } from 'material-ui';
 import WeatherDisplay from './WeatherDisplay';
 import { receiveLocation, changeRes } from '../actions/LocationActions';
 import Maps from './Maps';
-import { FlatButton } from 'material-ui';
-
 
 class LocationPage extends Component {
+  static propTypes = {
+    receiveLocation: PropTypes.func.isRequired,
+    changeRes: PropTypes.func.isRequired,
+    res: PropTypes.object,
+    weather_desc: PropTypes.string,
+    weather: PropTypes.object,
+  };
+
   constructor() {
     super();
 
@@ -56,8 +64,6 @@ class LocationPage extends Component {
             <FlatButton id="nextRest" primary type="button" onClick={this._changeRes} label="Next Restaurant" primary />
             <FlatButton id="nextRest" primary type="button" target="_blank" href={url} label="Yelp" primary />
             <FlatButton id="nextRest" primary type="button" href='/' label="New Search" primary />
-          {/* <a id="nextRest" className="btn btn-primary" target="_blank" href={url}>Yelp</a> */}
-          {/* <a id="nextRest" className="btn btn-primary" href='/'>New Search</a> */}
           </div>
           <div className="cuisine col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <WeatherDisplay main={main} weather_desc={weather_desc} description={description}/>

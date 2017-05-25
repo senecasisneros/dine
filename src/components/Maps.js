@@ -1,7 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Gmaps, Marker, InfoWindow, Circle } from 'react-gmaps';
 
 class Maps extends React.Component {
+  static propTypes = {
+    coord: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
     this.onMapCreated = this.onMapCreated.bind(this);

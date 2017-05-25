@@ -1,9 +1,10 @@
-import React from 'react'
-// import { geocodeByAddress, google } from 'react-places-autocomplete';
+import React from 'react';
+import PropTypes from 'prop-types';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import { TextField, FlatButton } from 'material-ui'
+import { TextField, FlatButton } from 'material-ui';
 
 var placeSearch, autocomplete;
+
 var componentForm = {
   street_number: 'short_name',
   route: 'long_name',
@@ -24,8 +25,13 @@ const btnStyle = {
 let _autocomplete = null;
 
 class AutoComplete extends React.Component {
+  static propTypes = {
+    getMaps: PropTypes.func.isRequired,
+    getLocation: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
-    super(props)
+    super(props);
     this.state = { address: '' }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.onChange = this.onChange.bind(this);
@@ -33,11 +39,11 @@ class AutoComplete extends React.Component {
 
   handleFormSubmit(event) {
     event.preventDefault()
-    const { address } = this.state
+    const { address } = this.state;
 
     geocodeByAddress(address,  (err, { lat, lng }) => {
       if (err) {
-        console.log('Oh no!', err)
+        console.log('Oh no!', err);
       }
 
       { lat, lng }
@@ -45,35 +51,35 @@ class AutoComplete extends React.Component {
       let obj = {address, lat , lng};
       this.props.getMaps(obj);
       this.props.getLocation(lat, lng)
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     _autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {types: ['geocode']});
-    }
-
-    onChange(e) {
-      this.setState({ address: e.target.value })
-    }
-    render() {
-      return (
-        <div className="text-center">
-          <form onSubmit={this.handleFormSubmit}>
-            <TextField
-              onChange={this.onChange}
-              floatingLabelText="Enter a location"
-              floatingLabelFixed={false}
-              placeholder=''
-              style={inputStyle}
-              value={this.state.address}
-              id="autocomplete"
-              type="text"
-              size="50" />
-            <FlatButton style={btnStyle} type="submit" label="Enter" primary={true} />
-        </form>
-      </div>
-    )
   }
+
+  onChange(e) {
+    this.setState({ address: e.target.value })
+  }
+  render() {
+    return (
+      <div className="text-center">
+        <form onSubmit={this.handleFormSubmit}>
+          <TextField
+            onChange={this.onChange}
+            floatingLabelText="Enter a location"
+            floatingLabelFixed={false}
+            placeholder=''
+            style={inputStyle}
+            value={this.state.address}
+            id="autocomplete"
+            type="text"
+            size="50" />
+          <FlatButton style={btnStyle} type="submit" label="Enter" primary={true} />
+      </form>
+    </div>
+  )
+}
 }
 
 export default AutoComplete

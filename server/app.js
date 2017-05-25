@@ -4,7 +4,7 @@
 const PORT = process.env.PORT || 8000;
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/dine1';
 
-// require('dotenv').config();
+require('dotenv').config();
 
 // PACKAGE REQUIRES
 const bodyParser = require('body-parser');

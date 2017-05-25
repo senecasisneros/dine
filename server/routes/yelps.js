@@ -1,4 +1,4 @@
-'use strict';
+
 
 const express = require('express');
 const router = express.Router();
@@ -13,4 +13,4 @@ router.route('/:lat/:long')
     });
   });
 
-  module.exports = router;
+module.exports = router;

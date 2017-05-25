@@ -1,4 +1,4 @@
-"use strict";
+
 
 // CONSTANTS
 const PORT = process.env.PORT || 8000;
@@ -16,15 +16,15 @@ require('dotenv').load({ silent: true });
 
 // DB CONNECT
 require('mongoose').connect(MONGO_URI, err => {
-  if(err) throw err;
+  if (err) throw err;
   console.log(`MongoDB connected to ${MONGO_URI}`);
 });
 
 // APP DECLARATION
 const app = express();
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, '../build')))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../build')));
 } else {
   // WEBPACK CONFIG
   const webpack = require('webpack');
@@ -33,11 +33,10 @@ if(process.env.NODE_ENV === 'production'){
 
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
-    publicPath: webpackConfig.output.publicPath
+    publicPath: webpackConfig.output.publicPath,
   }));
 
   app.use(require('webpack-hot-middleware')(compiler));
-
 }
 
 // GENERAL MIDDLEWARE
@@ -46,19 +45,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
-
 // ROUTES
 app.use('/api', require('./routes/api'));
 
 app.get('*', (req, res) => {
-  let indexPath = path.join(__dirname, '../src/index.html');
+  const indexPath = path.join(__dirname, '../src/index.html');
   res.sendFile(indexPath);
 });
 
 // SERVER LISTEN
 app.listen(PORT, err => {
-  if(err) throw err;
+  if (err) throw err;
 
   console.log(`Server listening at http://localhost:${PORT}`);
 });

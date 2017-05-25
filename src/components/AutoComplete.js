@@ -1,26 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { TextField, FlatButton } from 'material-ui';
 
-var placeSearch, autocomplete;
+let placeSearch,
+  autocomplete;
 
-var componentForm = {
+const componentForm = {
   street_number: 'short_name',
   route: 'long_name',
   locality: 'long_name',
   administrative_area_level_1: 'short_name',
   country: 'long_name',
-  postal_code: 'short_name'
+  postal_code: 'short_name',
 };
 
 const inputStyle = {
   width: '500px',
-  'fontSize': '30px'
-}
+  fontSize: '30px',
+};
 const btnStyle = {
-  'fontSize': '40px'
-}
+  fontSize: '40px',
+};
 
 let _autocomplete = null;
 
@@ -32,34 +33,34 @@ class AutoComplete extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { address: '' }
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.state = { address: '' };
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
+  componentDidMount() {
+    _autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')), { types: ['geocode'] });
+  }
+
+  onChange(e) {
+    this.setState({ address: e.target.value });
+  }
+
   handleFormSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     const { address } = this.state;
 
-    geocodeByAddress(address,  (err, { lat, lng }) => {
+    geocodeByAddress(address, (err, { lat, lng }) => {
       if (err) {
         console.log('Oh no!', err);
       }
 
-      { lat, lng }
-      let address = _autocomplete.getPlace().formatted_address;
-      let obj = {address, lat , lng};
+      { lat, lng; }
+      const address = _autocomplete.getPlace().formatted_address;
+      const obj = { address, lat, lng };
       this.props.getMaps(obj);
-      this.props.getLocation(lat, lng)
+      this.props.getLocation(lat, lng);
     });
-  };
-
-  componentDidMount() {
-    _autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {types: ['geocode']});
-  }
-
-  onChange(e) {
-    this.setState({ address: e.target.value })
   }
   render() {
     return (
@@ -69,17 +70,19 @@ class AutoComplete extends React.Component {
             onChange={this.onChange}
             floatingLabelText="Enter a location"
             floatingLabelFixed={false}
-            placeholder=''
+            placeholder=""
+            className="inputStyle"
             style={inputStyle}
             value={this.state.address}
             id="autocomplete"
             type="text"
-            size="50" />
-          <FlatButton style={btnStyle} type="submit" label="Enter" primary={true} />
-      </form>
-    </div>
-  )
-}
+            size="50"
+          />
+          <FlatButton style={btnStyle} type="submit" label="Enter" primary />
+        </form>
+      </div>
+    );
+  }
 }
 
-export default AutoComplete
+export default AutoComplete;

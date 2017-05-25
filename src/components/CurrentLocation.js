@@ -37,8 +37,8 @@ class CurrentLocation extends React.Component {
         label="Current Location"
         primary
       />
-  );
-}
+    );
+  }
 }
 
 export default CurrentLocation;

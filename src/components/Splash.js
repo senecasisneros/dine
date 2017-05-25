@@ -11,7 +11,7 @@ class Splash extends Component {
     getMaps: PropTypes.func,
   };
   render() {
-    let { getLocation, getMaps } = this.props;
+    const { getLocation, getMaps } = this.props;
     return (
       <div className="container">
         <div className="jumbotron mainJumbotron">

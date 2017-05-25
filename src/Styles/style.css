@@ -21,7 +21,7 @@ body {
 }
 
 .mainTitle {
-  font-size: 15vh !important;
+  /*font-size: 15vh !important;*/
   text-align: center;
 }
 
@@ -43,10 +43,10 @@ body {
 }
 
 #description {
-  font-size: 35px;
+  font-size: 30px;
   position: absolute;
   top: 100%;
-  left: 41%;
+  left: 32%;
   /*left: 200px;*/
   color: white;
   font-family: 'Kaushan Script', cursive;

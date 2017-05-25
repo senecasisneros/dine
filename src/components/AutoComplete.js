@@ -45,7 +45,7 @@ class AutoComplete extends React.Component {
         console.log(err);
       }
 
-      // const address = _autocomplete.getPlace().formatted_address;
+      const address = _autocomplete.getPlace().formatted_address;
       const obj = {
         address,
         lat,

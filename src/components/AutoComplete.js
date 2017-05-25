@@ -25,7 +25,7 @@ class AutoComplete extends React.Component {
 
   componentDidMount() {
     const script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDb7kHy1SXgQHdwKwMX-PJzEPX8BAuJSIs&libraries=places';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAMtcbe4U31mnuRUjxFZLOaItX-0XKDBj4&libraries=places';
     script.async = false;
     document.body.appendChild(script);
     script.onload = function () {
